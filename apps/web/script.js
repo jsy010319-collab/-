@@ -11,13 +11,13 @@ let chunks = [];
 async function sendAudio(blob) {
   const form = new FormData();
   form.append('audio', blob, 'speech.webm');
-  const res = await fetch('/chat/audio', { method: 'POST', body: form });
+  const res = await fetch('/api/chat-audio', { method: 'POST', body: form });
   const data = await res.json();
   renderFeedback(data.feedback);
 }
 
 async function sendText(text) {
-  const res = await fetch('/chat/text', {
+  const res = await fetch('/api/chat-text', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text })
