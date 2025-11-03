@@ -22,8 +22,12 @@ export default async function handler(req, res) {
   }
   try {
     // We don't actually need to parse the audio for mock feedback
-    await parseMultipart(req);
-    const feedback = generateFeedback(null);
+    const body = await parseMultipart(req);
+    // Try to extract scenario from simple multipart body (best-effort)
+    const text = body.toString('utf8');
+    const match = text.match(/name="scenario"\r\n\r\n([^\r\n]+)/);
+    const scenario = match ? match[1] : 'general';
+    const feedback = generateFeedback(null, scenario);
     res.status(200).json({ feedback });
   } catch (e) {
     res.status(500).json({ error: 'internal_error' });

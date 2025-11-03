@@ -11,8 +11,23 @@
       <h1>회화 학습 AI</h1>
     </header>
 
+    <nav class="tabs">
+      <a href="#chat" id="tabChat" class="tab active">회화</a>
+      <a href="#calendar" id="tabCalendar" class="tab">캘린더</a>
+    </nav>
+
     <main>
-      <section class="chat">
+      <section class="chat view" id="viewChat">
+        <div class="scenario">
+          <label for="scenarioSelect">상황 선택:</label>
+          <select id="scenarioSelect">
+            <option value="general">일상 회화</option>
+            <option value="movie">영화관</option>
+            <option value="airport">공항</option>
+            <option value="restaurant">레스토랑</option>
+            <option value="shopping">쇼핑</option>
+          </select>
+        </div>
         <div class="controls">
           <button id="recordBtn">녹음 시작</button>
           <button id="stopBtn" disabled>정지</button>
@@ -25,7 +40,7 @@
         <div class="feedback" id="feedback"></div>
       </section>
 
-      <section class="calendar">
+      <section class="calendar view hidden" id="viewCalendar">
         <h2>학습 캘린더</h2>
         <div class="calendar-controls">
           <button id="prevMonth">◀</button>

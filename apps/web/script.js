@@ -4,6 +4,13 @@ const player = document.getElementById('player');
 const feedbackDiv = document.getElementById('feedback');
 const textInput = document.getElementById('textInput');
 const sendTextBtn = document.getElementById('sendTextBtn');
+const scenarioSelect = document.getElementById('scenarioSelect');
+
+// tabs
+const tabChat = document.getElementById('tabChat');
+const tabCalendar = document.getElementById('tabCalendar');
+const viewChat = document.getElementById('viewChat');
+const viewCalendar = document.getElementById('viewCalendar');
 
 let mediaRecorder = null;
 let chunks = [];
@@ -11,6 +18,7 @@ let chunks = [];
 async function sendAudio(blob) {
   const form = new FormData();
   form.append('audio', blob, 'speech.webm');
+  form.append('scenario', scenarioSelect.value);
   const res = await fetch('/api/chat-audio', { method: 'POST', body: form });
   const data = await res.json();
   renderFeedback(data.feedback);
@@ -20,7 +28,7 @@ async function sendText(text) {
   const res = await fetch('/api/chat-text', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text })
+    body: JSON.stringify({ text, scenario: scenarioSelect.value })
   });
   const data = await res.json();
   renderFeedback(data.feedback);
@@ -149,4 +157,21 @@ saveNoteBtn.addEventListener('click', () => {
 // Initialize
 selectedDate = new Date();
 renderCalendar();
+
+function setActiveTab(hash) {
+  if (hash === '#calendar') {
+    tabChat.classList.remove('active');
+    tabCalendar.classList.add('active');
+    viewChat.classList.add('hidden');
+    viewCalendar.classList.remove('hidden');
+  } else {
+    tabCalendar.classList.remove('active');
+    tabChat.classList.add('active');
+    viewCalendar.classList.add('hidden');
+    viewChat.classList.remove('hidden');
+  }
+}
+
+window.addEventListener('hashchange', () => setActiveTab(location.hash));
+setActiveTab(location.hash || '#chat');
 
