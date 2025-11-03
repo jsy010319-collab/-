@@ -1,0 +1,19 @@
+body { font-family: -apple-system, system-ui, Segoe UI, Roboto, sans-serif; margin: 0; color: #111; }
+header { padding: 16px; background: #111; color: #fff; }
+main { padding: 16px; display: grid; gap: 24px; max-width: 960px; margin: 0 auto; }
+.controls { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+.text-fallback { display: flex; gap: 8px; }
+.text-fallback input { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 8px; }
+button { padding: 8px 12px; border: 1px solid #ddd; background: #fff; border-radius: 8px; cursor: pointer; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+.feedback { padding: 12px; border: 1px solid #eee; border-radius: 8px; background: #fafafa; }
+.calendar { border-top: 1px solid #eee; padding-top: 16px; }
+.calendar-controls { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.cell { border: 1px solid #eee; padding: 10px; text-align: right; min-height: 60px; border-radius: 8px; }
+.cell.placeholder { background: #fafafa; border-style: dashed; }
+.cell.selected { outline: 2px solid #111; }
+.cell.has-note { background: #fff9d6; }
+.notes { margin-top: 12px; display: grid; gap: 8px; }
+.notes textarea { width: 100%; height: 120px; padding: 8px; border: 1px solid #ccc; border-radius: 8px; }
+
